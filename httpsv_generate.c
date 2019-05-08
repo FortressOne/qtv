@@ -323,15 +323,20 @@ void HTTPSV_GenerateNowPlaying(cluster_t *cluster, oproxy_t *dest)
 
 		// 1st cell: watch now button
 		if (!allow_join.integer) {
-			snprintf(buffer, sizeof(buffer), "        <td class='wn'><span class=\"qtvfile\"><a href=\"/watch.qtv?sid=%i\">Watch&nbsp;now!</a></span></td>\n", streams->streamid);
+                        snprintf(buffer, sizeof(buffer), "        <td class='wn'><span class=\"qtvfile\"><a href=\"qw://%i@nicotinelounge.com:28000/qtvplay\">Watch&nbsp;now!</a></span></td>\n", streams->streamid);
 			Net_ProxySend(cluster, dest, buffer, strlen(buffer));
 		} else {
-			snprintf(buffer, sizeof(buffer), "        <td class='wn'><span class=\"qtvfile\"><a href=\"/watch.qtv?sid=%i\">Watch</a></span><span class=\"qtvfile\"><a href=\"/join.qtv?sid=%i\">Join</a></span></td>\n", streams->streamid, streams->streamid);
+                        snprintf(buffer, sizeof(buffer), "        <td class='wn'><span class=\"qtvfile\"><a href=\"qw://%i@nicotinelounge.com:28000/qtvplay\">Watch&nbsp;now!</a></span></td>\n", streams->streamid);
 			Net_ProxySend(cluster, dest, buffer, strlen(buffer));
 		}
 
+
 		// 2nd cell: server adress
-		HTMLPRINT("        <td class='adr'>");
+		HTMLPRINT("        <td class='adr'><p class='hostname' style='display:none'>");
+		char hostname[1024];
+		HTMLPRINT(Info_ValueForKey(streams->serverinfo, "hostname", hostname, sizeof(hostname)));
+		HTMLPRINT("</p>");
+
 		HTMLprintf(buffer, sizeof(buffer), true, "%s", server);
 		Net_ProxySend(cluster, dest, buffer, strlen(buffer));
 		HTMLPRINT("</td>\n");
