@@ -9,7 +9,6 @@ src/Release*/
 src/*.sdf
 src/*.user
 src/*.filters
-src/Makefile
 src/config.log
 src/config.status
 src/src/Makefile.dl
