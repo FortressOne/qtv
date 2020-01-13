@@ -5,15 +5,13 @@ RUN apt-get update \
     gcc \
     make \
  && rm -rf /var/lib/apt/lists/*
- COPY src/ /qtv/src/
- RUN cd /qtv/src/ \
-  && make \
-  && cd /qtv/ \
-  && mkdir /qtv/qtvproxy/ \
-  && cp src/qtv.bin /qtv/qtvproxy/ \
-  && mkdir /qtv/qtvproxy/qtv/ \
-  && cp src/qtv/qtvbg01.png src/qtv/style.css src/qtv/save.png src/qtv/stream.png /qtv/qtvproxy/qtv/ \
-  && cp -r src/qtv/levelshots/ /qtv/qtvproxy/qtv/ \
-  && rm -rf /qtv/src/
- COPY qtv.cfg /qtv/
- ENTRYPOINT ["/qtv/qtvproxy/qtv.bin", "+exec qtv.cfg"]
+COPY src/ /tmp/src/
+RUN cd /tmp/src/ \
+ && make \
+ && cd /qtv/ \
+ && cp /tmp/src/qtv.bin /qtv/ \
+ && mkdir /qtv/qtv/ \
+ && cp -r /tmp/src/qtv/ /qtv/ \
+ && rm -rf /tmp/src/
+COPY qtv.cfg /qtv/
+ENTRYPOINT ["/qtv/qtv.bin", "+exec qtv.cfg"]
