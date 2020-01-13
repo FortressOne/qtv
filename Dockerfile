@@ -14,7 +14,6 @@ RUN apt-get update \
   && mkdir /qtv/qtvproxy/qtv/ \
   && cp src/qtv/qtvbg01.png src/qtv/style.css src/qtv/save.png src/qtv/stream.png /qtv/qtvproxy/qtv/ \
   && cp -r src/qtv/levelshots/ /qtv/qtvproxy/qtv/ \
-  && cd /qtv \
   && rm -rf /qtv/src/
- COPY qtv.cfg /qtvproxy/
- CMD ["/qtv/qtvproxy/qtv.bin +exec qtv.cfg"]
+ COPY qtv.cfg /qtv/
+ ENTRYPOINT ["/qtv/qtvproxy/qtv.bin", "+exec qtv.cfg"]

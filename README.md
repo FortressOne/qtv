@@ -8,7 +8,7 @@ docker build --tag=qtv .
 Run qtv:
 
 ```sh
-docker run --interactive --tty --init --publish 30000:30000/udp qtv
+docker run --interactive --tty --init --publish 28000:28000 --publish 28000:28000/udp qtv
 ```
 
 
