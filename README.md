@@ -12,8 +12,8 @@ docker run \
 --interactive \
 --tty \
 --init \
---publish 27599:27599 \
---publish 27599:27599/udp \
+--publish 28000:28000 \
+--publish 28000:28000/udp \
 qtv \
 +hostname "FortressOne QTV" \
 +qtv <hostname>:<port>
